@@ -1,0 +1,23 @@
+h1{
+    color:rgb(14, 14, 87);
+}
+
+.main{
+    height: 250px;
+    background-color: rgb(20, 20, 90);
+    
+}
+.main img{
+    max-width: 250px;
+    filter: brightness(100%);
+}
+
+.position-relative{
+    filter: brightness(60%);
+    filter:blur(0.4px);
+}
+
+.NAV a{
+    padding:20px;
+    color:blueviolet;
+}
