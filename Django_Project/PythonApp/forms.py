@@ -29,13 +29,14 @@ class StudentRegistrationForm(forms.ModelForm):
     avatar = forms.FileField()
     course = forms.ChoiceField(
         choices=Student._meta.get_field('course').choices,
-        label="Select Course"
+        label="Courses"
     ) 
     
     class Meta:
         model = Student
         fields = '__all__'
 
+#Profile Edit Form
 
 class StudentEditForm(forms.ModelForm):
     country = forms.ChoiceField(
@@ -52,9 +53,20 @@ class StudentEditForm(forms.ModelForm):
     
     course = forms.ChoiceField(
         choices=Student._meta.get_field('course').choices,
-        label="Select Course"
+        label="Select Courses"
     )      
 
     class Meta:
         model = Student
-        fields = ['first_name', 'last_name', 'password','gender','dob','country','state','city','hobbies','avatar','course','phone']
+        fields = ['first_name', 'last_name', 'password','gender','dob','country','state','city','hobbies','avatar','phone','course']
+
+class Course(forms.ModelForm):
+    course = forms.ChoiceField(
+        choices=Student._meta.get_field('course').choices,
+        label="Select Courses"
+    )      
+
+    class Meta:
+        model = Student
+        fields = ['course']
+

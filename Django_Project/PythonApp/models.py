@@ -1,9 +1,8 @@
 from django.db import models
 
-# Create your models here.
-
 # models.py
 from django.db import models
+# For CONTACT
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
@@ -34,7 +33,7 @@ class Student(models.Model):
     last_name = models.CharField(max_length=50)
     password = models.CharField(max_length=100, default=1234)
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
-    dob = models.DateField()
+    dob = models.DateField(null=True, blank=True)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15)
     country = models.CharField(max_length=100, null=True, blank=True)
@@ -42,7 +41,7 @@ class Student(models.Model):
     city = models.CharField(max_length=100)
     hobbies = models.CharField(max_length=200)
     avatar = models.FileField(upload_to='documents/' ,default='none')
-    course = models.CharField(max_length=50, choices=COURSE_CHOICES,default='python')
+    course = models.CharField(max_length=50, choices=COURSE_CHOICES,default='python',null=True, blank=True)
     is_email_verified = models.BooleanField(default=True)
 
 

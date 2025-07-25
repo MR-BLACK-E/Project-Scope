@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 from .models import *
 from .forms import *
 from django.http import HttpResponse
-from django.core.mail import EmailMessage
+# from django.core.mail import EmailMessage
 from django.views import *
-from rest_framework import generics
+# from rest_framework import generics
 
 from django.contrib import messages
 
@@ -12,17 +12,16 @@ from .forms import StudentRegistrationForm
 from .models import Student
 from django.core.mail import send_mail
 
-from django.conf import settings
-from django.contrib import messages
-from django.urls import reverse
-from django.utils.crypto import get_random_string
+# from django.conf import settings
+# from django.urls import reverse
+# from django.utils.crypto import get_random_string
 
 # DATAS FROM USER
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout 
 
-# Create your views here.
+# MY VIEWS
 
 def home(request):
     return render(request,'home.html')
@@ -41,7 +40,7 @@ def about(request):
 
 
 
-#--try contact email--
+#-- contact email--
 
 
 def message_file(request):
@@ -89,7 +88,7 @@ def contact_view(request):
 
 
 #email verification
-email_verification_tokens = {}  # temp in-memory store
+email_verification_tokens = {}  
 
 
 def verify_email(request, token):
@@ -171,7 +170,7 @@ def course_selection(request):
         student= Student(
             course = course
         )
-        form = StudentRegistrationForm(request.POST, request.FILES)
+        form = Course(request.POST)
         if form.is_valid():
             student = form.save(commit=False)
             student.save()
@@ -180,7 +179,7 @@ def course_selection(request):
         else:
             messages.error(request,"Course Registration failed.")
             return redirect('course')
-    form = StudentRegistrationForm()
+    form = Course()
     return render(request, 'Course_selection.html', {'form': form })     
 # --PROFILE VIEW--     
 
@@ -220,7 +219,7 @@ def custom_logout_view(request):
     response.delete_cookie('logged_in_user') 
     return response
 
-from django.shortcuts import render, get_object_or_404, redirect
+# PROFILE VIEW
 
 def home_views(request):
     
@@ -228,7 +227,6 @@ def home_views(request):
         student=Student.objects.get(email=request.user)
 
         user = request.user
-        # user= get_object_or_404(Student)
 
         if request.method == 'POST':
             user.first_name = request.POST.get('first_name')
@@ -245,38 +243,18 @@ def home_views(request):
             user.avatar = request.POST.get('avatar')
             user.course = request.POST.get('course')
 
-            # student = Student(
-            #     first_name = user.first_name,
-            #     last_name=user.last_name,
-            #     password=user.password,
-            #     gender=user.gender,
-            #     dob=user.dob,
-            #     # email=user.email,
-            #     phone=user.phone,
-            #     country=user.country,
-            #     state=user.state,
-            #     city=user.city,
-            #     hobbies= user.hobbies,
-            #     avatar= user.avatar,
-            #     course = user.course
-            #     # is_email_verified = is_email_verified
-            # )
-        #     student.save()
-        #     student.save()
-        #     messages.success(request, "Profile updated!")
-        #     return redirect('home2')
-
-        # return render(request, 'Login_home.html', {'student': request.student})
+          
             form = StudentEditForm(request.POST, request.FILES,instance=student)
             if form.is_valid():
                 student = form.save(commit=False)
-                # student.is_email_verified = False
                 student.save()
+                
                 # if request.method == 'POST':
-                #     username=request.POST['email']
-                #     password=request.POST['password'] 
-                #     User.objects.create(username=username, password=make_password(password))       
+                    # username=request.POST['email']
+                    # password=request.POST['password'] 
+                    # User.objects.create( password=make_password(password))
 
+                      
                 messages.success(request, 'Profile updated!')
                 return redirect('home2')
             else:

@@ -36,10 +36,11 @@
 }
 
  /* --MAIN CSS-- */
-/* 
+
 *{
-    transition: 3s ease-in-out;
-} */
+    /* transition: 3s ease-in-out;
+    padding-top: 0px; */
+}
 
 .fade-on-scroll {
   opacity: 0;
